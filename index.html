@@ -8,22 +8,26 @@
 <body>
   <p>Please shake your device and see the background.</p>
 	<script type="text/javascript">  
-	var prefix = '../img/'
-	var img = new Array('jade.jpeg', 'fanglei.jpeg', 'ika.jpeg', 'cj.png', 'lc.png', 'hyr.png', 'wp.png');      
-	if('ondevicemotion' in window) {  
-	    var speed = 25;  
-	    var x = y = z = lastX = lastY = lastZ = 0;  
-	    window.addEventListener('devicemotion', function(){  
-	        var acceleration =event.accelerationIncludingGravity;  
-	        x = acceleration.x;  
-	        y = acceleration.y;  
-	        if(Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed) {  
-	            document.body.style.backgroundImage = 'url("' + prefix + img[Math.round(Math.random()*10)%7] + '")';
-	        }  
-	        lastX = x;  
-	        lastY = y;  
-	    }, false);  
-	}  
+	  
+	    if (window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', function(eventData) {   
+        // Acceleration
+        console.log(eventData.acceleration.x);
+        console.log(eventData.acceleration.y);
+        console.log(eventData.acceleration.z);
+    
+        // Acceleration including gravity
+        console.log(eventData.accelerationIncludingGravity.x);
+        console.log(eventData.accelerationIncludingGravity.y);
+        console.log(eventData.accelerationIncludingGravity.z);
+
+        // Rotation rate
+        console.log(eventData.rotationRate.alpha);
+        console.log(eventData.rotationRate.beta);
+        console.log(eventData.rotationRate.gamma);
+    }, false);
+}
+	        
 </script>
 </body>
 
